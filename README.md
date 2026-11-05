@@ -1,36 +1,225 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎫 TicketDesk – Ticket Management System
 
-## Getting Started
+TicketDesk is a web-based ticket management application built using **Next.js, Tailwind CSS, MongoDB, and Mongoose**. It helps users create, manage, track, and resolve tickets through a simple and responsive dashboard.
 
-First, run the development server:
+The application provides an organized way to manage hardware problems, software problems, application development tasks, and projects.
+
+## ✨ Features
+
+- **Dashboard:** View all tickets in one place.
+- **Create Tickets:** Add new tickets with titles, descriptions, categories, and priorities.
+- **Category Management:** Organize tickets into four categories:
+  - Hardware Problem
+  - Software Problem
+  - Application Development
+  - Project
+- **Priority Management:** Assign priorities from 1 to 5.
+- **Progress Tracking:** Track ticket progress from 0% to 100%.
+- **Status Management:** Manage tickets using three statuses:
+  - Not Started
+  - Started
+  - Done
+- **Edit Tickets:** Update existing ticket information.
+- **Delete Tickets:** Remove tickets with confirmation.
+- **Search Tickets:** Find tickets using their title or description.
+- **Category Filtering:** Filter tickets by category.
+- **Statistics:** View total, completed, in-progress, and not-started ticket counts.
+- **Responsive Design:** Use the application on desktop and mobile devices.
+- **Database Integration:** Store ticket information persistently using MongoDB.
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Next.js | Frontend and backend framework |
+| React.js | User interface |
+| Tailwind CSS | Styling and responsive design |
+| MongoDB Atlas | Cloud database |
+| Mongoose | MongoDB object modeling |
+| JavaScript | Application functionality |
+| Node.js | JavaScript runtime |
+| REST API | Communication between frontend and backend |
+
+## 📁 Project Structure
+
+```text
+TicketDesk/
+│
+├── app/
+│   ├── api/
+│   │   └── tickets/
+│   │       ├── route.js
+│   │       └── [id]/
+│   │           └── route.js
+│   │
+│   ├── ticket/
+│   │   ├── new/
+│   │   │   └── page.jsx
+│   │   └── [id]/
+│   │       └── page.jsx
+│   │
+│   ├── layout.jsx
+│   ├── page.js
+│   └── globals.css
+│
+├── components/
+│   ├── DashboardContent.jsx
+│   ├── NavMenu.jsx
+│   ├── TicketCard.jsx
+│   ├── TicketForm.jsx
+│   └── DeleteBlock.jsx
+│
+├── lib/
+│   ├── db.js
+│   └── pick.js
+│
+├── models/
+│   └── Ticket.js
+│
+├── .env.local
+├── .gitignore
+├── package.json
+└── README.md
+```
+
+## ⚙️ Installation and Setup
+
+Follow these steps to run TicketDesk on your local machine.
+
+### 1. Prerequisites
+
+Make sure you have installed:
+
+- Node.js
+- npm
+- Visual Studio Code
+- MongoDB Atlas account
+- Git
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/TicketDesk.git
+```
+
+Navigate into the project directory:
+
+```bash
+cd TicketDesk
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+If Mongoose is not already installed:
+
+```bash
+npm install mongoose
+```
+
+### 4. Configure MongoDB
+
+1. Create a MongoDB Atlas account.
+2. Create a database cluster.
+3. Create a database user.
+4. Configure your network access.
+5. Copy your MongoDB connection string.
+
+Create a `.env.local` file in the project root.
+
+Add the following configuration:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+BASE_URL=http://localhost:3000
+```
+
+Replace `your_mongodb_connection_string` with your actual MongoDB Atlas connection string.
+
+**Important:** Never upload `.env.local` or your database credentials to GitHub.
+
+### 5. Run the Development Server
+
+Start the application:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser and visit:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+TicketDesk should now be running locally.
 
-## Learn More
+## 🔌 API Endpoints
 
-To learn more about Next.js, take a look at the following resources:
+The application uses REST API routes to manage tickets.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/tickets` | Retrieve all tickets |
+| POST | `/api/tickets` | Create a new ticket |
+| GET | `/api/tickets/[id]` | Retrieve a specific ticket |
+| PUT | `/api/tickets/[id]` | Update a ticket |
+| DELETE | `/api/tickets/[id]` | Delete a ticket |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🗄️ Database Schema
 
-## Deploy on Vercel
+The application uses a MongoDB collection named `tickets`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Each ticket contains the following fields:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Field | Data Type | Description |
+|---|---|---|
+| `_id` | ObjectId | Unique ticket identifier |
+| `title` | String | Ticket title |
+| `description` | String | Ticket description |
+| `category` | String | Ticket category |
+| `priority` | Number | Priority level (1–5) |
+| `progress` | Number | Completion percentage (0–100) |
+| `status` | String | Current ticket status |
+| `createdAt` | Date | Ticket creation date |
+| `updatedAt` | Date | Last update date |
+
+## 📊 Ticket Categories
+
+TicketDesk supports four main categories:
+
+1. **Hardware Problem:** Issues related to physical computer components and devices.
+2. **Software Problem:** Issues related to software installation, configuration, and errors.
+3. **Application Development:** Tasks related to application development and improvements.
+4. **Project:** Tasks related to project planning, implementation, and documentation.
+
+## 🔮 Future Enhancements
+
+The following features can be considered for future versions:
+
+- User registration and authentication.
+- Role-based access control.
+- Email notifications.
+- File attachments.
+- Ticket comments and activity history.
+- Advanced reporting and analytics.
+- User profile management.
+
+## 🎯 Project Objective
+
+The main objective of TicketDesk is to develop a simple, efficient, and user-friendly web-based ticket management system that allows users to organize, track, and manage tickets in a centralized platform.
+
+## 👨‍💻 Author
+
+**Project Name:** TicketDesk – Ticket Management System
+
+**Project Type:** Mini Project
+
+**Technology Stack:** Next.js, React.js, Tailwind CSS, MongoDB, Mongoose
+
+## 📄 License
+
+This project is developed for educational and learning purposes.
