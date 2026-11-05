@@ -1,3 +1,4 @@
+export const instant = false;
 import TicketForm from "@/components/TicketForm";
  
 export default async function EditTicket({ params }) {
